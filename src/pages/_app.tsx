@@ -11,6 +11,7 @@ import {
   RegisterMutation,
 } from "../generated/graphql";
 
+// Helper function to make it easy to cast the types
 function betterUpdateQuery<Result, Query>(
   cache: Cache,
   qi: QueryInput, // primer parametro que recibe updatequery
@@ -32,6 +33,7 @@ const client = createClient({
     cacheExchange({
       updates: {
         Mutation: {
+          // se ejecuta cuando haga un login mutation (osea se logee un user), va a actualizar el cache (especificamente actualizara Me Query)
           login: (_result, args, cache, info) => {
             betterUpdateQuery<LoginMutation, MeQuery>(
               cache,
@@ -51,7 +53,7 @@ const client = createClient({
               }
             );
           },
-          // se ejecuta cuando haga un register mutation, va a actualizar el cache (especificamente actualizara Me Query)
+          // se ejecuta cuando haga un register mutation (osea se registre un user), va a actualizar el cache (especificamente actualizara Me Query)
           register: (_result, args, cache, info) => {
             betterUpdateQuery<RegisterMutation, MeQuery>(
               cache,
