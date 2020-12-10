@@ -8,6 +8,7 @@ const Index = () => {
   return (
     <>
       <NavBar />
+
       <div>Hello world from frontend</div>
       <br />
       {!data ? (
