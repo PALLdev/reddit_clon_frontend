@@ -20,9 +20,9 @@ const Register: React.FC<registerProps> = ({}) => {
       <NavBar />
       <Wrapper variant="small">
         <Formik
-          initialValues={{ username: "", password: "" }}
+          initialValues={{ username: "", password: "", email: "" }}
           onSubmit={async (valores, { setErrors }) => {
-            const response = await register(valores); // response me permite acceder a todos los datos de mi register mutation
+            const response = await register({ options: valores }); // response me permite acceder a todos los datos de mi register mutation
             if (response.data?.register.errors) {
               // handling errors (Optional chain(?): retorna undefined si no existe data)
               // [{field: "username", message: "existe un error"}] // asi vienen mis errores desde graphql (array de objetos)
@@ -39,10 +39,17 @@ const Register: React.FC<registerProps> = ({}) => {
           {({ isSubmitting }) => (
             <Form>
               <InputField
-                name="username"
-                placeholder="Nombre de usuario"
-                label="Nombre de usuario"
+                name="email"
+                placeholder="Correo electronico"
+                label="Correo electronico"
               />
+              <Box mt={3}>
+                <InputField
+                  name="username"
+                  label="Nombre de usuario"
+                  placeholder="Nombre de usuario"
+                />
+              </Box>
               <Box mt={3}>
                 <InputField
                   name="password"

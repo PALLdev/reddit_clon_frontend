@@ -20,9 +20,9 @@ const Login: React.FC<loginProps> = ({}) => {
       <NavBar />
       <Wrapper variant="small">
         <Formik
-          initialValues={{ username: "", password: "" }}
+          initialValues={{ usernameOrEmail: "", password: "" }}
           onSubmit={async (valores, { setErrors }) => {
-            const response = await login({ options: valores }); // response me permite acceder a todos los datos de mi mutation
+            const response = await login(valores); // response me permite acceder a todos los datos de mi mutation
             if (response.data?.login.errors) {
               setErrors(toErrorMap(response.data.login.errors)); // util que transforma array de errores en un objeto
             } else if (response.data?.login.user) {
@@ -34,9 +34,9 @@ const Login: React.FC<loginProps> = ({}) => {
           {({ isSubmitting }) => (
             <Form>
               <InputField
-                name="username"
-                placeholder="Nombre de usuario"
-                label="Nombre de usuario"
+                name="usernameOrEmail"
+                placeholder="Nombre de usuario o email"
+                label="Nombre de usuario o Email"
               />
               <Box mt={3}>
                 <InputField
